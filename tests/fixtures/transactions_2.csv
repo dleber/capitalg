@@ -1,0 +1,5 @@
+id,tz,date,base_currency,fee_currency,asset_code,type,exchange,qty,price,fee,note
+3,UTC,2018-05-02T00:00:01,btc,btc,eth,sell,test,5,0.026,0.0002,
+1,UTC,2018-05-01T00:00:00,usd,usd,btc,buy,test,1,6000,10,
+4,UTC,2018-05-04T00:00:00,usd,usd,btc,sell,test,1,6200,10,
+2,UTC,2018-05-02T00:00:00,btc,btc,eth,buy,test,5,0.025,0.0002,

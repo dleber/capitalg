@@ -1,0 +1,54 @@
+import os
+from pathlib import Path
+
+DATE_INPUT_FORMAT = "%Y-%m-%dT%H:%M:%S"
+DATE_RATE_FORMAT = '%Y-%m-%d'
+TAX_YEAR_INPUT_FORMAT = '%Y-%m-%d'
+
+FIELD_AMOUNT = 'amount'
+FIELD_BASE_CURRENCY = 'base_currency'
+FIELD_FEE = 'fee'
+FIELD_FEE_CURRENCY = 'fee_currency'
+FIELD_FEE_UNIT = 'fee_unit'
+FIELD_CAPITAL_GAIN_LT = 'captial_gain_lt'
+FIELD_CAPITAL_GAIN_ST = 'captial_gain_st'
+FIELD_CAPITAL_GAIN_TOTAL = 'captial_gain_total'
+FIELD_COST_BASE_AMOUNT = 'cost_base_amount'
+FIELD_COST_BASE_ID = 'cost_base_id'
+FIELD_ASSET_CODE = 'asset_code'
+FIELD_DATE = 'date'
+FIELD_EXCHANGE = 'exchange'
+FIELD_NOTE = 'note'
+FIELD_PRICE = 'price'
+FIELD_QTY = 'qty'
+FIELD_RAW_ID = 'id'
+FIELD_SALE_AMOUNT = 'sale_amount'
+FIELD_SALE_BROKERAGE = 'sale_brokerage'
+FIELD_SALE_ID = 'sale_id'
+FIELD_TRANSACTION_TYPE = 'type'
+FIELD_TZ = 'tz'
+
+OUTPUT_FIELDS_CGT_EVENTS = [
+    FIELD_DATE, FIELD_SALE_ID, FIELD_EXCHANGE, FIELD_ASSET_CODE, FIELD_QTY,
+    FIELD_PRICE, FIELD_SALE_AMOUNT, FIELD_SALE_BROKERAGE,
+    FIELD_COST_BASE_AMOUNT, FIELD_COST_BASE_ID, FIELD_CAPITAL_GAIN_TOTAL,
+    FIELD_CAPITAL_GAIN_LT, FIELD_CAPITAL_GAIN_ST, FIELD_NOTE
+]
+
+OUTPUT_FIELDS_COST_BASE = [
+    FIELD_COST_BASE_ID, FIELD_RAW_ID, FIELD_EXCHANGE, FIELD_ASSET_CODE,
+    FIELD_TRANSACTION_TYPE, FIELD_DATE, FIELD_QTY, FIELD_PRICE, FIELD_AMOUNT,
+    FIELD_FEE, FIELD_FEE_UNIT, FIELD_NOTE
+]
+
+# FIELD_TRANSACTION_TYPE must be one of these
+TRANSACTION_BUY_LABEL = 'buy'
+TRANSACTION_SELL_LABEL = 'sell'
+
+FILE_DIR = Path(os.environ.get('FILE_DIR', './cgfiles'))
+FILE_TRANSACTIONS = 'transactions.csv'
+FILE_FORMATTED_TRANSACTIONS = 'formatted_transactions.csv'
+FILE_CGT = 'cgt_events.csv'
+FILE_COST_BASE_TRANSACTION = 'cost_base_transactions.csv'
+FILE_RATES = 'rates.csv'
+FILE_UNALLOCATED_COST_BASE_TRANSACTION = 'unallocated_cost_base_transactions.csv'
