@@ -21,11 +21,12 @@ from capitalg.cg_helpers import register_cg_event
 from capitalg.utils import get_tax_year_cutoff_date
 
 
-def calculate_cg(file_dir: Path, tax_currency: str, queue_type_code: str, tax_timezone: str, tax_year_end: str):
+def calculate_cg(file_dir: str, tax_currency: str, queue_type_code: str, tax_timezone: str, tax_year_end: str):
+    file_dir = Path(file_dir)
+
     loader = TransactionLoader(
         input_path=file_dir / FILE_TRANSACTIONS,
-        output_path=file_dir /
-        FILE_FORMATTED_TRANSACTIONS,
+        output_path=file_dir / FILE_FORMATTED_TRANSACTIONS,
         tax_currency=tax_currency,
         tax_year_cutoff=get_tax_year_cutoff_date(tax_year_end, tax_timezone),
         tax_timezone=tax_timezone,
