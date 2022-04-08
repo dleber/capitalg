@@ -15,9 +15,10 @@ from capitalg.contstants import (
     FILE_UNALLOCATED_COST_BASE_TRANSACTION,
 )
 from capitalg.CostBaseQueue import CostBaseQueue, QueueTypes
-from capitalg.TransactionLoader import TransactionLoader, load_rates
+from capitalg.TransactionLoader import TransactionLoader
 from capitalg.Writer import Writer
 from capitalg.cg_helpers import register_cg_event
+from capitalg.rates_loader import load_rates
 from capitalg.utils import get_tax_year_cutoff_date
 
 

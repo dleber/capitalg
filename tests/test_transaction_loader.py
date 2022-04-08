@@ -6,7 +6,8 @@ from decimal import Decimal
 from operator import itemgetter
 
 from capitalg.contstants import FIELD_DATE, FIELD_FEE, FIELD_PRICE, FIELD_QTY, FIELD_TRANSACTION_TYPE
-from capitalg.TransactionLoader import TransactionLoader, load_rates
+from capitalg.TransactionLoader import TransactionLoader
+from capitalg.rates_loader import load_rates
 from capitalg.utils import get_tax_year_cutoff_date
 
 class TestTransactionLoader(unittest.TestCase):
