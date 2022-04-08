@@ -8,7 +8,7 @@ from capitalg.contstants import (
     TRANSACTION_BUY_LABEL,
     TRANSACTION_SELL_LABEL,
     FILE_TRANSACTIONS,
-    FILE_CGT,
+    FILE_CG_EVENTS,
     FILE_COST_BASE_TRANSACTION,
     FILE_FORMATTED_TRANSACTIONS,
     FILE_RATES,
@@ -43,7 +43,7 @@ def calculate_cg(file_dir: Path, tax_currency: str, queue_type_code: str, tax_ti
 def process_transactions(file_dir: Path, transactions: List[dict], queue_type: QueueTypes):
     queues = {}
 
-    with Writer(cgt_events_path=file_dir / FILE_CGT, cost_base_path=file_dir / FILE_COST_BASE_TRANSACTION) as writer:
+    with Writer(cgt_events_path=file_dir / FILE_CG_EVENTS, cost_base_path=file_dir / FILE_COST_BASE_TRANSACTION) as writer:
 
         for _, transaction in enumerate(transactions):
 

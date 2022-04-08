@@ -23,7 +23,7 @@ class TestMain(unittest.TestCase):
                 '2019-06-30'
             )
 
-            with open(f'{tempdir}/{contstants.FILE_CGT}') as csvfile:
+            with open(f'{tempdir}/{contstants.FILE_CG_EVENTS}') as csvfile:
                 reader = csv.DictReader(csvfile)
                 rows = [row for row in reader]
 
@@ -63,7 +63,7 @@ class TestMain(unittest.TestCase):
                 '2019-06-30'
             )
 
-            with open(f'{tempdir}/{contstants.FILE_CGT}') as csvfile:
+            with open(f'{tempdir}/{contstants.FILE_CG_EVENTS}') as csvfile:
                 reader = csv.DictReader(csvfile)
                 rows = [row for row in reader]
 

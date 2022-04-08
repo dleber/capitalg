@@ -12,7 +12,7 @@ from capitalg.contstants import (
 )
 
 
-def cg_summary(cgt_events_dir: str, tax_year_end: str) -> dict:
+def cg_summary(cg_events_path: str, tax_year_end: str) -> dict:
 
     tax_year_cutoff_obj = datetime.strptime(tax_year_end, TAX_YEAR_INPUT_FORMAT) + timedelta(days=1)
     tax_year_start_obj = datetime(year=tax_year_cutoff_obj.year - 1, month=tax_year_cutoff_obj.month, day=tax_year_cutoff_obj.day)
@@ -24,7 +24,7 @@ def cg_summary(cgt_events_dir: str, tax_year_end: str) -> dict:
     }
 
     assets = {}
-    with open(cgt_events_dir, 'r') as f:
+    with open(cg_events_path, 'r') as f:
         reader = csv.DictReader(f)
         for _, row in enumerate(reader):
             cg_date = datetime.strptime(row['date'], DATE_INPUT_FORMAT)
