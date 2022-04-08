@@ -55,7 +55,7 @@ class TransactionLoader:
         return self.transactions
 
     def _format_transaction(self, transaction: dict, transaction_date: datetime) -> dict:
-        """ Strings to decimal fields and date formatting
+        """ Converts numeric strings to decimal fields and format dates
         """
         fee = self._rebase_fee(transaction, transaction_date)
         return {
@@ -75,13 +75,18 @@ class TransactionLoader:
         with open(self.input_path) as f:
             reader = csv.DictReader(f)
             transactions = []
-            for i, transaction in enumerate(reader):
+            for i, raw_transaction in enumerate(reader):
                 
-                self._validate_transaction(transaction)
+                self._validate_transaction(raw_transaction)
+                transaction = self._standardize_transaction(raw_transaction)
+
+                # Allow for zulu time, since it is a common export format
+                # If zulu time is detected, we drop the Z and override the tz to be UTC
+                uses_zulu_time = transaction[FIELD_DATE][-1].lower() == 'z'
 
                 transaction_date = convert_timezone(
-                    date_str=transaction[FIELD_DATE],
-                    source_tz=transaction[FIELD_TZ],
+                    date_str=transaction[FIELD_DATE][:-1] if uses_zulu_time is True else transaction[FIELD_DATE],
+                    source_tz='UTC' if uses_zulu_time is True else transaction[FIELD_TZ],
                     dest_tz=self.tax_timezone
                 )
 
@@ -90,7 +95,7 @@ class TransactionLoader:
                     continue
 
                 try:
-                    if self.tax_currency != transaction['base_currency']:
+                    if self.tax_currency != transaction[FIELD_BASE_CURRENCY]:
                         transactions.extend(
                             self._rebase_transaction(transaction, transaction_date)
                         )
@@ -191,18 +196,10 @@ class TransactionLoader:
         if transaction[FIELD_TRANSACTION_TYPE] not in (TRANSACTION_BUY_LABEL, TRANSACTION_SELL_LABEL):
             raise InputValidationError(f'Unknown transaction type {transaction[FIELD_TRANSACTION_TYPE]} ')
 
-def load_rates(input_path: Path) -> dict:
-    if input_path.exists() is False:
-        return {}
-
-    with open(input_path) as f:
-        reader = csv.DictReader(f)
-        rates = {}
-        for i, rate in enumerate(reader):
-            try:
-                date_key = datetime.fromisoformat(rate['date']).strftime(DATE_RATE_FORMAT)
-            except ValueError:
-                raise InputValidationError(f'Error in rates file on line {i} - invalid date format')
-            rates[date_key] = dict(rate)
-
-    return rates
+    def _standardize_transaction(self, transaction: dict) -> dict:
+        return {
+            **transaction,
+            FIELD_ASSET_CODE: transaction[FIELD_ASSET_CODE].lower(),
+            FIELD_BASE_CURRENCY: transaction[FIELD_BASE_CURRENCY].lower(),
+            FIELD_FEE_CURRENCY: transaction[FIELD_FEE_CURRENCY].lower(),
+        }
