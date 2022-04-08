@@ -24,11 +24,13 @@ def register_cg_event(writer: Writer, sale: dict, costs: List[dict]):
 
     cost_base_id = make_cost_base_id()
     writer.write_cost_base_transactions(cost_base_id, costs)
-    writer.write_cgt_event(cost_base={
-        FIELD_COST_BASE_ID: cost_base_id,
-        **cost_base,
-    },
-                           sale=sale)
+    writer.write_cgt_event(
+        cost_base={
+            FIELD_COST_BASE_ID: cost_base_id,
+            **cost_base,
+        },
+        sale=sale
+    )
 
 
 def calculate_cg_transaction(sale: dict, costs: List[dict]) -> Dict[str, Decimal]:

@@ -2,7 +2,7 @@ import argparse
 from pathlib import Path
 
 from capitalg.main import calculate_cg
-from capitalg.contstants import FILE_DIR, FILE_CGT, FILE_UNALLOCATED_COST_BASE_TRANSACTION, FILE_TRANSACTIONS
+from capitalg.contstants import FILE_DIR, FILE_CG_EVENTS, FILE_UNALLOCATED_COST_BASE_TRANSACTION, FILE_TRANSACTIONS
 from capitalg.analysis.balance import get_balance
 from capitalg.analysis.summary import cg_summary
 from capitalg.contstants import FILE_DIR
@@ -36,10 +36,10 @@ def main():
 def cg(args):
     print('Calcualting capital gains...')
     calculate_cg(Path(args.folder_path), args.tax_currency, args.queue_type, args.timezone, args.tax_year_end)
-    print(f'Finished calculating. Output files are available in {FILE_DIR}')
+    print(f'Finished calculating capital gains. Output files are available in the {args.folder_path} folder')
 
 def summary(args):
-    assets = cg_summary(Path(args.folder_path) / FILE_CGT, args.tax_year_end)
+    assets = cg_summary(Path(args.folder_path) / FILE_CG_EVENTS, args.tax_year_end)
     for asset, cgs in assets.items():
         print(asset)
         for k, v in cgs.items():

@@ -59,16 +59,19 @@ class TransactionLoader:
         """
         fee = self._rebase_fee(transaction, transaction_date)
         return {
-            FIELD_DATE: transaction_date.strftime(DATE_INPUT_FORMAT),
-            FIELD_ASSET_CODE: transaction[FIELD_ASSET_CODE],
+            FIELD_RAW_ID: transaction[FIELD_RAW_ID],
             FIELD_EXCHANGE: transaction[FIELD_EXCHANGE],
+            FIELD_DATE: transaction_date.strftime(DATE_INPUT_FORMAT),
+            FIELD_TZ: self.tax_timezone,
             FIELD_TRANSACTION_TYPE: transaction[FIELD_TRANSACTION_TYPE],
+            FIELD_BASE_CURRENCY: self.tax_currency,
+            FIELD_ASSET_CODE: transaction[FIELD_ASSET_CODE],
             FIELD_PRICE: Decimal(transaction[FIELD_PRICE]),
             FIELD_QTY: Decimal(transaction[FIELD_QTY]),
+            FIELD_FEE_CURRENCY: self.tax_currency,
             FIELD_FEE: fee,
             FIELD_FEE_UNIT: round(fee / Decimal(transaction[FIELD_QTY]), 2) if Decimal(transaction[FIELD_QTY]) > 0 else Decimal(0),
             FIELD_NOTE: transaction[FIELD_NOTE],
-            FIELD_RAW_ID: transaction[FIELD_RAW_ID],
         }
 
     def _load(self) -> List[dict]:
