@@ -45,7 +45,7 @@ OUTPUT_FIELDS_COST_BASE = [
 TRANSACTION_BUY_LABEL = 'buy'
 TRANSACTION_SELL_LABEL = 'sell'
 
-FILE_DIR = Path(os.environ.get('FILE_DIR', './cgfiles'))
+FILE_DIR = Path(os.environ.get('FILE_DIR', './capitalg_files'))
 FILE_TRANSACTIONS = 'transactions.csv'
 FILE_FORMATTED_TRANSACTIONS = 'formatted_transactions.csv'
 FILE_CGT = 'cgt_events.csv'
