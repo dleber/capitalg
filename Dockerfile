@@ -12,10 +12,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY requirements.dev.txt requirements.dev.txt
 RUN pip install --no-cache-dir -r requirements.dev.txt
 
-# Create a new user
-RUN useradd --create-home appuser
-USER appuser
-
 # Copy our app over to the image
 COPY ./ $APP_HOME
 
