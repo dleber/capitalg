@@ -29,7 +29,7 @@ Calculate capital gains using either LIFO and FIFO methods.
 
 `pip install capitalg`
 
-Create a folder called `capitalg_files` to hold input and output files. This should contain your transactions in `transactions.csv`, and exchange rates in `rates.csv` if applicable. [See input files](#markdown-header-input-files) below for details on constructing these files.
+Create a folder called `capitalg_files` to hold input and output files. This should contain your transactions in `transactions.csv`, and exchange rates in `rates.csv` if applicable. [See input files](#input-files) below for details on constructing these files.
 
 ### Calculate Capital Gains
 
