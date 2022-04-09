@@ -158,7 +158,7 @@ print(balance)
 | price         | 9200.52              | numeric - the price of the asset denominated in the base currency          |
 | fee_currency  | usd                  | currency of the fee                                                    |
 | fee           | 10.5                 | numeric - fees of transaction (e.g. brokerage) in the fee currency   |
-| note          | exampe note          | optional note on the transaction                                       |
+| note          | example note          | optional note on the transaction                                       |
 
 Rows can be in any order (doesn't have to be chronological), as long as headers are on the first row.
 
@@ -250,7 +250,7 @@ Example: A bank charges a $200 international transfer fee to deposit money to an
 
 There is no warranty for this program. Do your own research and seek professional tax advice relevant to your tax jurisdiction.
 
-The creator and any contributors will not be held liable in any way for damages,losses or errors resulting from use of this module.
+The creator and any contributors will not be held liable in any way for damages, losses or errors resulting from use of this module.
 
 ----------
 
